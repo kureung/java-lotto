@@ -1,10 +1,13 @@
 package step2step3.lotto.lottoTicket;
 
 import step2step3.lotto.lottoNumber.LottoNumber;
-import step2step3.lotto.lottoNumber.LottoNumberStorage;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -17,18 +20,23 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
-    public static LottoTicket from(NumbersGenerator numbersGenerator) {
-        LottoNumberStorage lottoNumberStorage = LottoNumberStorage.lottoNumberStorage();
-        List<LottoNumber> lottoNumbers = lottoNumberStorage.lottoNumbers(numbersGenerator);
-        return new LottoTicket(lottoNumbers);
-    }
-
     private static void verifyNumbers(List<LottoNumber> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
 
         if (lottoNumbers.size() != NUMBER_OF_LOTTO) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
+    }
+
+    public static LottoTicket from(NumbersGenerator numbersGenerator) {
+        return new LottoTicket(lottoNumbers(numbersGenerator));
+    }
+
+    private static List<LottoNumber> lottoNumbers(NumbersGenerator numbersGenerator) {
+        Set<Integer> randomNumbers = numbersGenerator.numbers();
+        return randomNumbers.stream()
+                .map(LottoNumber::lottoNumber)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public List<LottoNumber> numbers() {
