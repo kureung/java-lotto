@@ -15,14 +15,25 @@ public class LottoTicketsFactory {
     private final int manualPurchaseCount;
 
     public LottoTicketsFactory(int purchaseAmount, int manualPurchaseCount) {
-        verifyPurchaseAmount(purchaseAmount);
+        verifyValidProperty(purchaseAmount, manualPurchaseCount);
         this.purchaseAmount = purchaseAmount;
         this.manualPurchaseCount = manualPurchaseCount;
+    }
+
+    private void verifyValidProperty(int purchaseAmount, int manualPurchaseCount) {
+        verifyPurchaseAmount(purchaseAmount);
+        verifyManualPurchaseCount(manualPurchaseCount);
     }
 
     private void verifyPurchaseAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE || purchaseAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("금액이 천원 단위가 아니거나 천원 미민일 수 없습니다.");
+        }
+    }
+
+    private void verifyManualPurchaseCount(int manualPurchaseCount) {
+        if (purchaseAmount < manualPurchaseCount * LOTTO_PRICE) {
+            throw new IllegalArgumentException("수동 구매 금액이 총 구매 금액을 초과할 수 없습니다.");
         }
     }
 

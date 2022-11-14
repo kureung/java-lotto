@@ -3,8 +3,8 @@ package step2step3.lotto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2step3.lotto.lottoTicket.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.NumbersGenerator;
 
 import java.util.List;
 import java.util.Set;
@@ -37,5 +37,15 @@ class LottoTicketsFactoryTest {
         assertThatThrownBy(() -> new LottoTicketsFactory(price, manualPurchaseCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("금액이 천원 단위가 아니거나 천원 미민일 수 없습니다.");
+    }
+
+    @Test
+    void 수동_구매_금액이_총_구매_금액을_초과할_경우_예외가_발생한다() {
+        int totalPrice = 1000;
+        int manualPurchaseCount = 2;
+
+        assertThatThrownBy(() -> new LottoTicketsFactory(totalPrice, manualPurchaseCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수동 구매 금액이 총 구매 금액을 초과할 수 없습니다.");
     }
 }
