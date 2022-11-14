@@ -18,9 +18,10 @@ class LottoTicketsTest {
         int numberOfTickets = 1;
         int lottoPrice = 1000;
         int totalPrice = lottoPrice * numberOfTickets;
+        int manualPurchaseCount = 0;
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
 
-        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
+        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, manualPurchaseCount).lottoTickets(numbersGenerator);
 
         assertThat(lottoTickets.numberOfTickets()).isOne();
     }
@@ -31,9 +32,10 @@ class LottoTicketsTest {
         int lottoPrice = 1000;
         int totalPrice = lottoPrice * numberOfTickets;
         Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        int manualPurchaseCount = 0;
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(lottoNumbers);
 
-        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
+        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, manualPurchaseCount).lottoTickets(numbersGenerator);
 
         WinningLotto winningLotto = new WinningLotto(1, LottoTicket.from(numbersGenerator));
         assertThat(lottoTickets.yieldCalculator(winningLotto)).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
@@ -45,9 +47,10 @@ class LottoTicketsTest {
         int lottoPrice = 1000;
         int totalPrice = lottoPrice * numberOfTickets;
         Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        int manualPurchaseCount = 0;
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(lottoNumbers);
 
-        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
+        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, manualPurchaseCount).lottoTickets(numbersGenerator);
 
         WinningLotto winningLotto = new WinningLotto(1, LottoTicket.from(numbersGenerator));
         assertThat(lottoTickets.matchIndicatorCalculator(winningLotto)).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));

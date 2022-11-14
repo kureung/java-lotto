@@ -30,7 +30,8 @@ public class LottoGame {
     }
 
     private LottoTickets lottoTickets(int purchaseAmount) {
-        LottoTickets lottoTickets = new LottoTicketsFactory(purchaseAmount, numbersGenerator).lottoTickets();
+        int n = 1;
+        LottoTickets lottoTickets = new LottoTicketsFactory(purchaseAmount, n).lottoTickets(numbersGenerator);
         consoleOutputView.printNumberOfPurchases(lottoTickets);
 
         return lottoTickets;

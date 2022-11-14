@@ -12,12 +12,12 @@ public class LottoTicketsFactory {
     private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
-    private final NumbersGenerator numbersGenerator;
+    private final int manualPurchaseCount;
 
-    public LottoTicketsFactory(int purchaseAmount, NumbersGenerator numbersGenerator) {
+    public LottoTicketsFactory(int purchaseAmount, int manualPurchaseCount) {
         verifyPurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
-        this.numbersGenerator = numbersGenerator;
+        this.manualPurchaseCount = manualPurchaseCount;
     }
 
     private void verifyPurchaseAmount(int purchaseAmount) {
@@ -26,12 +26,12 @@ public class LottoTicketsFactory {
         }
     }
 
-    public LottoTickets lottoTickets() {
+    public LottoTickets lottoTickets(NumbersGenerator numbersGenerator) {
         int numberOfTickets = purchaseAmount / LOTTO_PRICE;
-        return new LottoTickets(numberAsLottoTickets(numberOfTickets), LOTTO_PRICE);
+        return new LottoTickets(numberAsLottoTickets(numberOfTickets, numbersGenerator), LOTTO_PRICE);
     }
 
-    private List<LottoTicket> numberAsLottoTickets(int numberOfTickets) {
+    private List<LottoTicket> numberAsLottoTickets(int numberOfTickets, NumbersGenerator numbersGenerator) {
         return IntStream.range(0, numberOfTickets)
                 .mapToObj(numberOfTicket -> LottoTicket.from(numbersGenerator))
                 .collect(Collectors.toUnmodifiableList());
