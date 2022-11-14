@@ -3,7 +3,6 @@ package step2step3.lotto.lottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2step3.lotto.lottoNumber.LottoNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,7 +22,7 @@ class LottoNumberTest {
     void 로또_숫자는_1이상_45이하만_가능하다(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자는 1이상 46이하이어야 합니다.");
+                .hasMessage("숫자는 1이상 45이하이어야 합니다.");
     }
 
     @Test

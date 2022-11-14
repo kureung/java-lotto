@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         final int lottoNumberMax = 45;
 
         if (number < lottoNumberMin || lottoNumberMax < number) {
-            throw new IllegalArgumentException("숫자는 1이상 46이하이어야 합니다.");
+            throw new IllegalArgumentException("숫자는 1이상 45이하이어야 합니다.");
         }
     }
 
