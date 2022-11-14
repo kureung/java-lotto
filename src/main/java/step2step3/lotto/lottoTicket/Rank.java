@@ -32,9 +32,10 @@ public enum Rank {
     }
 
     private boolean isMatchRank(long numberOfMatchingNumbers, boolean isMatchBonus) {
-        return isMatchCountFive(numberOfMatchingNumbers)
-                ? isSameMatchBonus(isMatchBonus)
-                : isSameMatchCount(numberOfMatchingNumbers);
+        if (isMatchCountFive(numberOfMatchingNumbers)) {
+            return isSameMatchBonus(isMatchBonus);
+        }
+        return isSameMatchCount(numberOfMatchingNumbers);
     }
 
     private boolean isMatchCountFive(long numberOfMatchingNumbers) {
