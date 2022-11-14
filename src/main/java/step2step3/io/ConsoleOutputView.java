@@ -1,7 +1,7 @@
 package step2step3.io;
 
 import step2step3.lotto.LottoTickets;
-import step2step3.lotto.lottoNumber.LottoNumber;
+import step2step3.lotto.lottoTicket.LottoNumber;
 import step2step3.lotto.lottoTicket.LottoTicket;
 import step2step3.lotto.lottoTicket.Rank;
 

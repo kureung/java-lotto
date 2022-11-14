@@ -1,6 +1,6 @@
 package step2step3.randomNumbers;
 
-import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.NumbersGenerator;
 
 import java.util.Set;
 

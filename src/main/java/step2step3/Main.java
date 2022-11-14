@@ -3,7 +3,7 @@ package step2step3;
 import step2step3.io.ConsoleInputView;
 import step2step3.io.ConsoleOutputView;
 import step2step3.lotto.LottoTickets;
-import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.NumbersGenerator;
 import step2step3.lottoGame.LottoGame;
 import step2step3.randomNumbers.RandomNumbersGenerator;
 

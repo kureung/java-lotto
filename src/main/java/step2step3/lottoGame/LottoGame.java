@@ -6,7 +6,7 @@ import step2step3.lotto.LottoTickets;
 import step2step3.lotto.LottoTicketsFactory;
 import step2step3.lotto.MatchIndicatorCalculator;
 import step2step3.lotto.YieldCalculator;
-import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
 import step2step3.lotto.lottoTicket.WinningLotto;
 import step2step3.randomNumbers.InfusedNumbersGenerator;

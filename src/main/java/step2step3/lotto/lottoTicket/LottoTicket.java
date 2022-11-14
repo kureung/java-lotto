@@ -1,8 +1,5 @@
 package step2step3.lotto.lottoTicket;
 
-import step2step3.lotto.lottoNumber.LottoNumber;
-import step2step3.lotto.lottoNumber.NumbersGenerator;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;

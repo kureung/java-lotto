@@ -1,8 +1,9 @@
-package step2step3.lotto.lottoNumber;
+package step2step3.lotto.lottoTicket;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2step3.lotto.lottoTicket.LottoNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

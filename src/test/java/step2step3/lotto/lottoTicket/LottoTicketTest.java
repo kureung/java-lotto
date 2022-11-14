@@ -1,7 +1,6 @@
 package step2step3.lotto.lottoTicket;
 
 import org.junit.jupiter.api.Test;
-import step2step3.lotto.lottoNumber.NumbersGenerator;
 
 import java.util.Set;
 
