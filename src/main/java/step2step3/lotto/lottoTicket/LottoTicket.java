@@ -45,10 +45,14 @@ public class LottoTicket {
 
     public Rank rank(LottoTicket winningLottoTicket, boolean isMatchBonus) {
         long matchCount = numbers.stream()
-                .filter(winningLottoTicket.numbers::contains)
+                .filter(winningLottoTicket::hasLottoNumber)
                 .count();
 
         return Rank.rank(matchCount, isMatchBonus);
+    }
+    
+    private boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override
