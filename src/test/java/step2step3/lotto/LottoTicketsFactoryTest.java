@@ -9,8 +9,7 @@ import step2step3.lotto.lottoTicket.NumbersGenerator;
 import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketsFactoryTest {
 
@@ -57,5 +56,17 @@ class LottoTicketsFactoryTest {
         assertThatThrownBy(() -> new LottoTicketsFactory(totalPrice, manualPurchaseCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동 구매 개수가 0 또는 양수이어야 합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {
+            0,
+            1
+    })
+    void 수동_구매_개수가_0_또는_양수일_경우_예외가_발생하지_않는다(int manualPurchaseCount) {
+        int totalPrice = 1000;
+
+        assertThatCode(() -> new LottoTicketsFactory(totalPrice, manualPurchaseCount))
+                .doesNotThrowAnyException();
     }
 }

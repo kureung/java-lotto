@@ -22,7 +22,7 @@ public class LottoTicketsFactory {
 
     private void verifyValidProperty(int purchaseAmount, int manualPurchaseCount) {
         verifyPurchaseAmount(purchaseAmount);
-        verifyManualPurchaseCount(manualPurchaseCount);
+        verifyManualPurchaseCount(purchaseAmount, manualPurchaseCount);
     }
 
     private void verifyPurchaseAmount(int purchaseAmount) {
@@ -31,7 +31,7 @@ public class LottoTicketsFactory {
         }
     }
 
-    private void verifyManualPurchaseCount(int manualPurchaseCount) {
+    private void verifyManualPurchaseCount(int purchaseAmount, int manualPurchaseCount) {
         if (manualPurchaseCount < 0) {
             throw new IllegalArgumentException("수동 구매 개수가 0 또는 양수이어야 합니다.");
         }
