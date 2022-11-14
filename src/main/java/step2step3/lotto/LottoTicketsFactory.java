@@ -32,6 +32,10 @@ public class LottoTicketsFactory {
     }
 
     private void verifyManualPurchaseCount(int manualPurchaseCount) {
+        if (manualPurchaseCount < 0) {
+            throw new IllegalArgumentException("수동 구매 개수가 0 또는 양수이어야 합니다.");
+        }
+
         if (purchaseAmount < manualPurchaseCount * LOTTO_PRICE) {
             throw new IllegalArgumentException("수동 구매 금액이 총 구매 금액을 초과할 수 없습니다.");
         }

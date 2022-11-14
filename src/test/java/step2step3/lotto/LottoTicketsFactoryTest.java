@@ -48,4 +48,14 @@ class LottoTicketsFactoryTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동 구매 금액이 총 구매 금액을 초과할 수 없습니다.");
     }
+
+    @Test
+    void 수동_구매_개수가_음수이면_예외가_발생한다() {
+        int totalPrice = 1000;
+        int manualPurchaseCount = -1;
+
+        assertThatThrownBy(() -> new LottoTicketsFactory(totalPrice, manualPurchaseCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수동 구매 개수가 0 또는 양수이어야 합니다.");
+    }
 }
