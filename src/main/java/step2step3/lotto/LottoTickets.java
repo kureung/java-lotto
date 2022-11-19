@@ -6,6 +6,8 @@ import step2step3.lotto.lottoTicket.WinningLotto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -54,5 +56,17 @@ public class LottoTickets {
     public MatchIndicatorCalculator matchIndicatorCalculator(WinningLotto winningLotto) {
         return new MatchIndicatorCalculator(matchedRanks(winningLotto));
     }
+
+    public LottoTickets addedLottoTickets(LottoTickets lottoTickets) {
+        List<LottoTicket> addedLottoTickets = Stream.concat(this.lottoTicketStream(), lottoTickets.lottoTicketStream())
+                .collect(Collectors.toUnmodifiableList());
+
+        return new LottoTickets(addedLottoTickets, lottoPrice);
+    }
+
+    private Stream<LottoTicket> lottoTicketStream() {
+        return lottoTickets.stream();
+    }
+
 }
 

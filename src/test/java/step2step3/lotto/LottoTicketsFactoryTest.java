@@ -12,19 +12,6 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketsFactoryTest {
-
-    @Test
-    void 로또_티켓들을_생성할_수_있다() {
-        int price = 1000;
-        int manualPurchaseCount = 0;
-        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
-
-        LottoTicketsFactory lottoTicketsFactory = new LottoTicketsFactory(price, manualPurchaseCount);
-
-        List<LottoTicket> lottoTickets = List.of(LottoTicket.from(numbersGenerator));
-        assertThat(lottoTicketsFactory.lottoTickets(numbersGenerator)).isEqualTo(new LottoTickets(lottoTickets, price));
-    }
-
     @ParameterizedTest
     @ValueSource(ints = {
             999,
@@ -68,5 +55,30 @@ class LottoTicketsFactoryTest {
 
         assertThatCode(() -> new LottoTicketsFactory(totalPrice, manualPurchaseCount))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    void 자동으로_로또를_구매할_수_있다() {
+        int purchaseCount = 0;
+        int totalPrice = 1000;
+
+        LottoTicketsFactory lottoTicketsFactory = new LottoTicketsFactory(totalPrice, purchaseCount);
+
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicketsFactory.autoPurchasedLottoTickets(numbersGenerator))
+                .isEqualTo(new LottoTickets(List.of(LottoTicket.from(numbersGenerator)), 1000));
+    }
+
+    @Test
+    void 수동으로_로또를_구매할_수_있다() {
+        int purchaseCount = 1;
+        int totalPrice = 1000;
+
+        LottoTicketsFactory lottoTicketsFactory = new LottoTicketsFactory(totalPrice, purchaseCount);
+
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicketsFactory.manualPurchasedLottoTickets(numbersGenerator))
+                .isEqualTo(new LottoTickets(List.of(LottoTicket.from(numbersGenerator)), 1000));
+
     }
 }

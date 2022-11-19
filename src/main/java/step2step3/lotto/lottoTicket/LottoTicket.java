@@ -33,6 +33,7 @@ public class LottoTicket {
         Set<Integer> randomNumbers = numbersGenerator.numbers();
         return randomNumbers.stream()
                 .map(LottoNumber::lottoNumber)
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 

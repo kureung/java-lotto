@@ -6,12 +6,14 @@ import step2step3.lotto.LottoTickets;
 import step2step3.lotto.LottoTicketsFactory;
 import step2step3.lotto.MatchIndicatorCalculator;
 import step2step3.lotto.YieldCalculator;
-import step2step3.lotto.lottoTicket.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.NumbersGenerator;
 import step2step3.lotto.lottoTicket.WinningLotto;
 import step2step3.randomNumbers.InfusedNumbersGenerator;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGame {
 
@@ -26,15 +28,27 @@ public class LottoGame {
     }
 
     public LottoTickets purchasedLotteries() throws IOException {
-        return lottoTickets(consoleInputView.purchaseAmount());
+        return purchasedLottoTickets();
     }
 
-    private LottoTickets lottoTickets(int purchaseAmount) {
-        int n = 1;
-        LottoTickets lottoTickets = new LottoTicketsFactory(purchaseAmount, n).lottoTickets(numbersGenerator);
-        consoleOutputView.printNumberOfPurchases(lottoTickets);
+    private LottoTickets purchasedLottoTickets() throws IOException {
+        int purchaseAmount = consoleInputView.purchaseAmount();
+        int manualPurchasedCount = consoleInputView.manualPurchasedCount();
 
-        return lottoTickets;
+        LottoTicketsFactory lottoTicketsFactory = new LottoTicketsFactory(purchaseAmount, manualPurchasedCount);
+        LottoTickets autoPurchasedLottoTickets = lottoTicketsFactory.autoPurchasedLottoTickets(numbersGenerator);
+        LottoTickets manualPurchasedLottoTickets = manualPurchasedLottoTickets(manualPurchasedCount, lottoTicketsFactory);
+        return manualPurchasedLottoTickets.addedLottoTickets(autoPurchasedLottoTickets);
+    }
+
+    private LottoTickets manualPurchasedLottoTickets(int manualPurchasedCount, LottoTicketsFactory lottoTicketsFactory) throws IOException {
+        consoleOutputView.printLottoNumbers();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i< manualPurchasedCount; i++) {
+            NumbersGenerator infusedNumbersGenerator = new InfusedNumbersGenerator(consoleInputView.manualPurchasedLottoTickets());
+            lottoTickets.add(LottoTicket.from(infusedNumbersGenerator));
+        }
+        return lottoTicketsFactory.manualPurchasedLottoTickets(lottoTickets);
     }
 
     public void printLottoTicketsNumbers(LottoTickets lottoTickets) {
@@ -64,5 +78,4 @@ public class LottoGame {
         YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningLotto);
         consoleOutputView.printYield(yieldCalculator.yield());
     }
-
 }

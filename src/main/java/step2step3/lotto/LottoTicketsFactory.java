@@ -1,7 +1,7 @@
 package step2step3.lotto;
 
-import step2step3.lotto.lottoTicket.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.NumbersGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,13 +37,21 @@ public class LottoTicketsFactory {
         }
 
         if (purchaseAmount < manualPurchaseCount * LOTTO_PRICE) {
+            System.out.println("purchaseAmount = " + purchaseAmount);
+            System.out.println("manualPurchaseCount = " + manualPurchaseCount);
+
             throw new IllegalArgumentException("수동 구매 금액이 총 구매 금액을 초과할 수 없습니다.");
         }
     }
 
-    public LottoTickets lottoTickets(NumbersGenerator numbersGenerator) {
-        int numberOfTickets = purchaseAmount / LOTTO_PRICE;
-        return new LottoTickets(numberAsLottoTickets(numberOfTickets, numbersGenerator), LOTTO_PRICE);
+    public LottoTickets autoPurchasedLottoTickets(NumbersGenerator numbersGenerator) {
+        int totalTicketCount = purchaseAmount / LOTTO_PRICE;
+        int autoTicketCount = totalTicketCount - manualPurchaseCount;
+        return new LottoTickets(numberAsLottoTickets(autoTicketCount, numbersGenerator), LOTTO_PRICE);
+    }
+
+    public LottoTickets manualPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
+        return new LottoTickets(lottoTickets, LOTTO_PRICE);
     }
 
     private List<LottoTicket> numberAsLottoTickets(int numberOfTickets, NumbersGenerator numbersGenerator) {

@@ -5,8 +5,6 @@ import step2step3.lotto.lottoTicket.LottoNumber;
 import step2step3.lotto.lottoTicket.LottoTicket;
 import step2step3.lotto.lottoTicket.Rank;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,6 +23,11 @@ public class ConsoleOutputView {
         System.out.printf("총 수익률은 %.2f입니다.%n", yield);
     }
 
+    public void printLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+
+    }
+
     public void printMatchIndicator(Map<Rank, Long> ranks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -39,18 +42,11 @@ public class ConsoleOutputView {
     }
 
     private String printLottoTicket(LottoTicket lottoTicket) {
-        Deque<Integer> numbers = lottoTicket.numbers()
+        return lottoTicket.numbers()
                 .stream()
                 .map(LottoNumber::number)
-                .collect(Collectors.toCollection(ArrayDeque::new));
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        sb.append(numbers.pollFirst());
-        numbers.forEach(number -> sb.append(", ").append(number));
-        sb.append("]");
-
-        return sb.toString();
+                .map(String::valueOf)
+                .collect(Collectors.joining(",", "[", "]"));
     }
 
 }

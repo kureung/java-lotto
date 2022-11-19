@@ -22,7 +22,7 @@ public class ConsoleInputView {
         String[] numbers = br.readLine()
                 .split(", ");
 
-        return  Arrays.stream(numbers)
+        return Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toUnmodifiableSet());
     }
@@ -33,4 +33,17 @@ public class ConsoleInputView {
         return Integer.parseInt(br.readLine());
     }
 
+    public int manualPurchasedCount() throws IOException {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(br.readLine());
+    }
+
+    public Set<Integer> manualPurchasedLottoTickets() throws IOException {
+        String[] numbers = br.readLine()
+                .split(", ");
+
+        return Arrays.stream(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toUnmodifiableSet());
+    }
 }
